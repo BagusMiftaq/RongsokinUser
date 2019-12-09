@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">RongsokinUser</string>
+    <string name="sign_in">Masuk</string>
+    <string name="belum_punya">"Belum punya akun? Daftar disini"</string>
+    <string name="udah_punya">"Sudah punya akun? Masuk disini"</string>
+    <string name="title_activity_home">HomeAct</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_dashboard">Riwayat</string>
+    <string name="title_notifications">Chat</string>
+    <string name="profile">Profile</string>
+    <string name="setting">Pengaturan</string>
+    <string name="info">Tentang</string>
+    <string name="exit">Keluar</string>
+    <string name="enter_name">Masukkan Nama</string>
+    <string name="tambah">Tambah</string>
+    <string name="ubah">Ubah</string>
+</resources>
