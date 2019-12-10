@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "515934729329-vftg15a09373cffb2ttuvktv4m95gedd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edicoding.picodiploma.rongsokinuser",
+            "certificate_hash": "309e8b910c924bc5c201cffdac0dcc38e0cab5b4"
+          }
+        },
+        {
           "client_id": "515934729329-htsfq8hesl91o7chl7crl195443b0o52.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
