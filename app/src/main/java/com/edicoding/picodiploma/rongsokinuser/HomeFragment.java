@@ -88,6 +88,8 @@ public class HomeFragment extends Fragment {
                     tambahList.add(tambah);
                 }
 
+                Tambahlist adapter = new Tambahlist(getActivity(), tambahList);
+                listViewTambah.setAdapter(adapter);
 
             }
 
