@@ -1,5 +1,6 @@
 package com.edicoding.picodiploma.rongsokinuser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.edicoding.picodiploma.rongsokinuser.input.InputActivity;
+import com.edicoding.picodiploma.rongsokinuser.input.KatagoriActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,8 +42,7 @@ public class HomeFragment extends Fragment {
     ListView listViewTambah;
 
     List<Tambah> tambahList;
-
-
+    FloatingActionButton btn;
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
@@ -49,6 +52,7 @@ public class HomeFragment extends Fragment {
         editTextnama = v.findViewById(R.id.editTextnama);
         buttontambah = v.findViewById(R.id.buttontambah);
         spinnertambah = v.findViewById(R.id.spinnerjenis);
+        btn = v.findViewById(R.id.input);
         //T.2
         listViewTambah = v.findViewById(R.id.listViewTambah);
         tambahList = new ArrayList<>();
@@ -57,6 +61,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tambah();
+            }
+        });
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), KatagoriActivity.class);
+                startActivity(intent);
             }
         });
 

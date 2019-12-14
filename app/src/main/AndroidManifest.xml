@@ -3,18 +3,20 @@
     package="com.edicoding.picodiploma.rongsokinuser">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".input.InputActivity"></activity>
+        <activity android:name=".input.KatagoriActivity" />
         <activity android:name=".SuksesAct" />
         <activity android:name=".RegisterAct" />
         <activity
             android:name=".HomeAct"
-            android:theme="@style/AppTheme" >
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".Login_Act" />
         <activity android:name=".SplashAct">
             <intent-filter>
