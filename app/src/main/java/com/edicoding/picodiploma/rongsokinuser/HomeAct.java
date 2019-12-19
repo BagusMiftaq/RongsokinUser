@@ -3,11 +3,14 @@ package com.edicoding.picodiploma.rongsokinuser;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.edicoding.picodiploma.rongsokinuser.fragment.DashboardFragment;
+import com.edicoding.picodiploma.rongsokinuser.fragment.HomeFragment;
+import com.edicoding.picodiploma.rongsokinuser.fragment.NotivicationFragment;
+import com.edicoding.picodiploma.rongsokinuser.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class KatagoriActivity extends AppCompatActivity
 {
-    private ImageView tShirts, sportsTShirts;
+    private ImageView botolplastik, kardus,besi,kaca;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
@@ -25,31 +25,54 @@ public class KatagoriActivity extends AppCompatActivity
         setContentView(R.layout.activity_katagori);
 
 
-        tShirts = (ImageView) findViewById(R.id.t_shirts);
-        sportsTShirts = (ImageView) findViewById(R.id.sports_t_shirts);
-
+        botolplastik = (ImageView) findViewById(R.id.k_botolplastik);
+        kardus = (ImageView) findViewById(R.id.k_kaca);
+        kaca = (ImageView) findViewById(R.id.k_kaca);
+        besi = (ImageView) findViewById(R.id.k_besi);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        tShirts.setOnClickListener(new View.OnClickListener() {
+        botolplastik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(KatagoriActivity.this, InputActivity.class);
-                intent.putExtra("category", "Hoax");
-                intent.putExtra("profilname","waw");
-                intent.putExtra("profilemail","waw");
+                intent.putExtra("category", "botol plastik");
+                intent.putExtra("profilname",currentUser.getDisplayName());
+                intent.putExtra("profilemail",currentUser.getEmail());
                 startActivity(intent);
             }
         });
 
 
-        sportsTShirts.setOnClickListener(new View.OnClickListener() {
+        kardus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(KatagoriActivity.this, InputActivity.class);
-                intent.putExtra("category", "Bukan Hoax");
+                intent.putExtra("category", "kardus");
+                intent.putExtra("profilname",currentUser.getDisplayName());
+                intent.putExtra("profilemail",currentUser.getEmail());
+                startActivity(intent);
+            }
+        });
+
+        besi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(KatagoriActivity.this, InputActivity.class);
+                intent.putExtra("category", "besi");
+                intent.putExtra("profilname",currentUser.getDisplayName());
+                intent.putExtra("profilemail",currentUser.getEmail());
+                startActivity(intent);
+            }
+        });
+
+        kaca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(KatagoriActivity.this, InputActivity.class);
+                intent.putExtra("category", "kaca");
                 intent.putExtra("profilname",currentUser.getDisplayName());
                 intent.putExtra("profilemail",currentUser.getEmail());
                 startActivity(intent);

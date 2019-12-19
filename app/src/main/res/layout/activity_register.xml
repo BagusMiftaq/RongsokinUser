@@ -102,7 +102,6 @@
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:text="Masuk"
-        android:onClick="Masuk"
         android:textColor="@color/colorPrimary"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"

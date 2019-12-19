@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login_Act extends AppCompatActivity {
 
@@ -35,51 +36,58 @@ public class Login_Act extends AppCompatActivity {
         ins_password = findViewById(R.id.ins_password);
         fAuth = FirebaseAuth.getInstance();
 
-        btn_sign_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btn_sign_in.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String email = ins_email.getText().toString().trim();
-                        String password = ins_password.getText().toString().trim();
+        btn_sign_in.setOnClickListener(view -> btn_sign_in.setOnClickListener(view1 -> {
+            String email = ins_email.getText().toString().trim();
+            String password = ins_password.getText().toString().trim();
 
-                        if (TextUtils.isEmpty(email)) {
-                            ins_email.setError("Harap isi email dengan benar");
-                            return;
-                        }
-                        if (TextUtils.isEmpty(password)) {
-                            ins_password.setError("password nya yang bener heh");
-                            return;
-                        }
-                        if (password.length() < 6) {
-                            ins_password.setError("Password harus lebih dari 6 digit");
-                            return;
-                        }
+            if (TextUtils.isEmpty(email)) {
+                ins_email.setError("Harap isi email dengan benar");
+                return;
+            }
+            if (TextUtils.isEmpty(password)) {
+                ins_password.setError("password nya yang bener heh");
+                return;
+            }
+            if (password.length() < 6) {
+                ins_password.setError("Password harus lebih dari 6 digit");
+                return;
+            }
 
-                        fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(Login_Act.this, "Login Succes", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), HomeAct.class));
-                                } else {
-                                    Toast.makeText(Login_Act.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+            fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(Login_Act.this, "Login Succes", Toast.LENGTH_SHORT).show();
+                        checkIfEmailVerified();
+                    } else {
+                        Toast.makeText(Login_Act.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+            });
+        }));
+        textlog.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), RegisterAct.class)));
+    }
+    private void checkIfEmailVerified()
+    {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            }
+        if (user.isEmailVerified())
+        {
+            // user is verified, so you can finish this activity or send user to activity which you want.
+            Intent intent = new Intent(Login_Act.this, HomeAct.class);
+            startActivity(intent);
+            finish();
+            Toast.makeText(Login_Act.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            // email is not verified, so just prompt the message to the user and restart this activity.
+            // NOTE: don't forget to log out the user.
+            Toast.makeText(Login_Act.this, "Anda belum verifikasi email anda...", Toast.LENGTH_SHORT).show();
+            FirebaseAuth.getInstance().signOut();
 
+            //restart this activity
 
-        });
-        textlog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RegisterAct.class));
-            }
-        });
+        }
     }
 }

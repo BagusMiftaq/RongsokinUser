@@ -1,4 +1,4 @@
-package com.edicoding.picodiploma.rongsokinuser;
+package com.edicoding.picodiploma.rongsokinuser.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.edicoding.picodiploma.rongsokinuser.Login_Act;
+import com.edicoding.picodiploma.rongsokinuser.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends NavHostFragment {

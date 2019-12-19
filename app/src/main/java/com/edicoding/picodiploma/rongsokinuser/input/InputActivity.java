@@ -2,9 +2,18 @@ package com.edicoding.picodiploma.rongsokinuser.input;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,7 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.edicoding.picodiploma.rongsokinuser.HomeFragment;
+import com.edicoding.picodiploma.rongsokinuser.fragment.HomeFragment;
 import com.edicoding.picodiploma.rongsokinuser.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,13 +38,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 public class InputActivity extends AppCompatActivity
 {
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,profilname,profilemail;
+    private String CategoryName, Description, Price, saveCurrentDate, saveCurrentTime,profilname,profilemail;
     private Button AddNewProductButton;
     private ImageView InputProductImage;
     private EditText InputProductName, InputProductDescription, InputProductPrice;
@@ -47,13 +59,16 @@ public class InputActivity extends AppCompatActivity
     private ProgressDialog loadingBar;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
+    LocationManager locationManager;
+    LocationListener locationListener;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+        locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+        boolean isGPS_enabled = locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER);
 
 
         CategoryName = getIntent().getExtras().get("category").toString();
@@ -65,7 +80,6 @@ public class InputActivity extends AppCompatActivity
 
         AddNewProductButton = (Button) findViewById(R.id.add_new_product);
         InputProductImage = (ImageView) findViewById(R.id.select_product_image);
-        InputProductName = (EditText) findViewById(R.id.product_name);
         InputProductDescription = (EditText) findViewById(R.id.product_description);
         InputProductPrice = (EditText) findViewById(R.id.product_price);
         loadingBar = new ProgressDialog(this);
@@ -74,8 +88,7 @@ public class InputActivity extends AppCompatActivity
         InputProductPrice.setEnabled(false);
         InputProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 OpenGallery();
             }
         });
@@ -83,11 +96,73 @@ public class InputActivity extends AppCompatActivity
 
         AddNewProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 ValidateProductData();
             }
         });
+        //-----------------------------------------------------------------------//
+        if (isGPS_enabled) {
+            locationListener = new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+
+                    double longitude = location.getLongitude();
+                    double latitude = location.getLatitude();
+
+                    try {
+                        Geocoder geocoder = new Geocoder(InputActivity.this, Locale.getDefault());
+                        List<Address> addressesList = geocoder.getFromLocation(latitude, longitude, 1);
+
+
+                        InputProductDescription.setText(addressesList.get(0).getAddressLine(0));
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+
+                }
+
+            };
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},1);
+        } else{
+            locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, 0,0, locationListener);
+
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
+
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,locationListener);
+                InputProductDescription.setText("Getting Location");
+            }
+        } else {
+            InputProductDescription.setText("Access not granted");
+        }
     }
 
 
@@ -118,7 +193,6 @@ public class InputActivity extends AppCompatActivity
     {
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
-        Pname = InputProductName.getText().toString();
 
 
         if (ImageUri == null)
@@ -132,10 +206,6 @@ public class InputActivity extends AppCompatActivity
         else if (TextUtils.isEmpty(Price))
         {
             Toast.makeText(this, "Please Tulis Nama Anda...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Pname))
-        {
-            Toast.makeText(this, "Please Tulis Nama Berita...", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -224,7 +294,6 @@ public class InputActivity extends AppCompatActivity
         productMap.put("image", downloadImageUrl);
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
-        productMap.put("pname", Pname);
         productMap.put("profilname", profilname);
         productMap.put("profilemail",profilemail);
 

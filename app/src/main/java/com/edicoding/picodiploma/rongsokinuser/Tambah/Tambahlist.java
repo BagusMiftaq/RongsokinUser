@@ -1,4 +1,4 @@
-package com.edicoding.picodiploma.rongsokinuser;
+package com.edicoding.picodiploma.rongsokinuser.Tambah;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.edicoding.picodiploma.rongsokinuser.R;
+
 import java.util.List;
 
 public class Tambahlist extends ArrayAdapter <Tambah> {
@@ -17,7 +19,7 @@ public class Tambahlist extends ArrayAdapter <Tambah> {
     private List <Tambah> tambahList;
 
     public  Tambahlist (Activity context, List<Tambah> tambahList){
-        super(context,R.layout.list_layout, tambahList);
+        super(context, R.layout.list_layout, tambahList);
         this.context = context;
         this.tambahList = tambahList;
     }

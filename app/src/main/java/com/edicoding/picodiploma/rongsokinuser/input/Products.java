@@ -2,16 +2,15 @@ package com.edicoding.picodiploma.rongsokinuser.input;
 
 public class Products
 {
-    private String pname, description, price, image, category, pid, date, time,profilname,profilemail;
+    private String  description, price, image, category, pid, date, time,profilname,profilemail;
 
     public Products()
     {
 
     }
 
-    public Products(String pname, String description, String price, String image, String category, String pid, String date,
+    public Products(String description, String price, String image, String category, String pid, String date,
                     String time, String profilname, String profilemail) {
-        this.pname = pname;
         this.description = description;
         this.price = price;
         this.image = image;
@@ -39,14 +38,6 @@ public class Products
         this.profilname = profilname;
     }
 
-
-    public String getPname() {
-        return pname;
-    }
-
-    public void setPname(String pname) {
-        this.pname = pname;
-    }
 
     public String getDescription() {
         return description;

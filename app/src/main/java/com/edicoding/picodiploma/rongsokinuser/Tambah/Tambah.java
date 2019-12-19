@@ -1,4 +1,4 @@
-package com.edicoding.picodiploma.rongsokinuser;
+package com.edicoding.picodiploma.rongsokinuser.Tambah;
 
 public class Tambah {
     String tambahid;

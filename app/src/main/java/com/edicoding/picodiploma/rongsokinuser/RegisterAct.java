@@ -36,6 +36,7 @@ public class RegisterAct extends AppCompatActivity {
     private EditText email,Nama, kataSandi, konfirmasiSandi;
     private Button daftar_klik;
     private FirebaseAuth mAuth;
+    private TextView btnmasuk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class RegisterAct extends AppCompatActivity {
         Nama = findViewById(R.id.regName);
         kataSandi =  findViewById(R.id.regPassword);
         konfirmasiSandi =  findViewById(R.id.regPassword2);
+        btnmasuk = findViewById(R.id.btnMasuk);
 
         daftar_klik =  findViewById(R.id.regBtn);
 
@@ -59,6 +61,13 @@ public class RegisterAct extends AppCompatActivity {
                 String $nama = Nama.getText().toString().trim();
 
                 validasiForm($email,$nama, $kataSandi, $konfirmasi);
+            }
+        });
+        btnmasuk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent waw = new Intent(RegisterAct.this,Login_Act.class);
+                startActivity(waw);
             }
         });
 
@@ -188,12 +197,5 @@ public class RegisterAct extends AppCompatActivity {
                     }
 
                 });
-    }
-
-
-    public void Masuk(View view) {
-
-        Intent intentMasuk = new Intent(RegisterAct.this, Login_Act.class);
-        startActivity(intentMasuk);
     }
 }

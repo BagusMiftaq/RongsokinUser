@@ -7,18 +7,31 @@
     tools:context=".input.KatagoriActivity">
 
     <ImageView
-        android:id="@+id/t_shirts"
+        android:id="@+id/k_botolplastik"
         android:layout_width="171dp"
         android:layout_height="172dp"
         android:background="@drawable/ic_icon_material_account_circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.148" />
 
     <ImageView
-        android:id="@+id/sports_t_shirts"
+        android:id="@+id/k_kardus"
+        android:layout_width="171dp"
+        android:layout_height="172dp"
+        android:background="@drawable/ic_icon_material_account_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.54" />
+
+    <ImageView
+        android:id="@+id/k_kaca"
         android:layout_width="171dp"
         android:layout_height="172dp"
         android:background="@drawable/ic_icon_material_account_circle"
@@ -26,6 +39,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.933"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.148" />
+
+    <ImageView
+        android:id="@+id/k_besi"
+        android:layout_width="171dp"
+        android:layout_height="172dp"
+        android:background="@drawable/ic_icon_material_account_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
