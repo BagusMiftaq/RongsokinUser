@@ -197,11 +197,11 @@ public class InputActivity extends AppCompatActivity
 
         if (ImageUri == null)
         {
-            Toast.makeText(this, "Berita image is mandatory...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "image is mandatory...", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Description))
         {
-            Toast.makeText(this, "Tolong Tulis Penjelasan Berita...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tolong Tulis deskripsi...", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Price))
         {
@@ -217,8 +217,8 @@ public class InputActivity extends AppCompatActivity
 
     private void StoreProductInformation()
     {
-        loadingBar.setTitle("Posting Berita");
-        loadingBar.setMessage("Dear pengguna, Tolong Tunggu Berita Sedang di Posting.");
+        loadingBar.setTitle("Posting Barang");
+        loadingBar.setMessage("Dear pengguna, Tolong Tunggu Barang Sedang di Posting.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
@@ -250,7 +250,7 @@ public class InputActivity extends AppCompatActivity
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
             {
-                Toast.makeText(InputActivity.this, "Berita uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(InputActivity.this, "Barang berhasil di unggah...", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -272,7 +272,7 @@ public class InputActivity extends AppCompatActivity
                         {
                             downloadImageUrl = task.getResult().toString();
 
-                            Toast.makeText(InputActivity.this, "got the Berita image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InputActivity.this, "berhasil ...", Toast.LENGTH_SHORT).show();
 
                             SaveProductInfoToDatabase();
                         }
